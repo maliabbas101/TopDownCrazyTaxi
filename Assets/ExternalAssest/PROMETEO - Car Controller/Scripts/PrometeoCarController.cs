@@ -9,8 +9,6 @@ something useful for your game. Best regards, Mena.
 */
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,10 +40,11 @@ public class PrometeoCarController : MonoBehaviour
       public int handbrakeDriftMultiplier = 5; // How much grip the car loses when the user hit the handbrake.
       [Space(10)]
       public Vector3 bodyMassCenter; // This is a vector that contains the center of mass of the car. I recommend to set this value
-                                    // in the points x = 0 and z = 0 of your car. You can select the value that you want in the y axis,
-                                    // however, you must notice that the higher this value is, the more unstable the car becomes.
-                                    // Usually the y value goes from 0 to 1.5.
+                                     // in the points x = 0 and z = 0 of your car. You can select the value that you want in the y axis,
+                                     // however, you must notice that the higher this value is, the more unstable the car becomes.
+                                     // Usually the y value goes from 0 to 1.5.
 
+    public float carHealth=100;
     //WHEELS
 
       //[Header("WHEELS")]
@@ -92,7 +91,8 @@ public class PrometeoCarController : MonoBehaviour
       //The following variable lets you to set up a UI text to display the speed of your car.
       public bool useUI = false;
       public Text carSpeedText; // Used to store the UI object that is going to show the speed of the car.
-
+    [Space(10)]
+    public Slider carHealthSlider;
     //SOUNDS
 
       [Space(20)]
@@ -769,6 +769,12 @@ public class PrometeoCarController : MonoBehaviour
 
         driftingAxis = 0f;
       }
+    }
+
+    public void DamageCar()
+    {
+        carHealth--;
+        carHealthSlider.value = carHealth;
     }
 
 }
