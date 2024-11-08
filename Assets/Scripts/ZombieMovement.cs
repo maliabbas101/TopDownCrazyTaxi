@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 namespace Zombies {
     public class ZombieMovement : MonoBehaviour
     {
@@ -19,6 +22,7 @@ namespace Zombies {
         [SerializeField] private PrometeoCarController Car;
         [SerializeField] private GameObject BloodEffect;
         [SerializeField] private Rigidbody ZombieRigidBody;
+        [SerializeField] private GameObject zombieArmature;
         [SerializeField] private CapsuleCollider ZombieCapsuleCollider;
         [SerializeField] private GameObject zombieModel;
         [SerializeField] private AudioSource zombieHitAudio;
@@ -38,6 +42,10 @@ namespace Zombies {
         private bool _isHanging;
 
         [SerializeField] float PullDelayTime = 2;
+        private int zombieStickDirection;
+        [SerializeField] private float carFlipForce=3000;
+        [SerializeField] private float carFlipForceIncrement;
+        private CarCollider zombieStickCollider;
         #endregion
 
 
@@ -50,7 +58,7 @@ namespace Zombies {
     
         }
 
-        IEnumerator Screaming()
+        private IEnumerator Screaming()
         {
             var randomScream = Random.Range(0, 2);
             yield return new WaitForSeconds(Random.Range(5, 20));
@@ -108,7 +116,7 @@ namespace Zombies {
                     PetrolRandomly();
                 }
 
-                else if (Vector3.Distance(Car.transform.position, transform.position) > AttackingRange)
+                else if (Vector3.Distance(Car.transform.position, transform.position) > AttackingRange && !_isAttacking && !_isHanging)
                 {
                     ChaseCar();
                 }
@@ -125,12 +133,14 @@ namespace Zombies {
         private void TackAction()
         {
 
-            if (!_isHanging)
+            if (!_isHanging )
             {
-
                 dir = (Car.transform.position - transform.position).normalized;
                 RotateTowardsDir(dir);
                 _isAttacking = true;
+        //        _isChasing = false;
+
+             //   if (Vector3.Distance(Car.transform.position, transform.position) > AttackingRange) _isAttacking = false;
             }
             else
             {
@@ -152,13 +162,16 @@ namespace Zombies {
 
             if (sideCheck > 0)
             {
+                zombieStickDirection = 1;
                 // On the right side
                 zombieModel.transform.localRotation = Quaternion.Euler(0, 90, 0);
             }
             else
             {
+                zombieStickDirection = -1;
                 // On the left side
                 zombieModel.transform.localRotation = Quaternion.Euler(0, -90, 0);
+                
             }
         }
 
@@ -250,8 +263,12 @@ namespace Zombies {
 
         public void Die()
         {
+            if(zombieStickCollider!=null) zombieStickCollider._zombieStick = false;
+            transform.SetParent(null);
             _isAlive = false;
+            _isHanging = false;
             zombieHitAudio.Play();
+            zombieArmature.SetActive(false);
             StartCoroutine(UpdateInterval());
             ZombieRigidBody.constraints = RigidbodyConstraints.None;
             Vector3 hitDirection = Car.transform.position - ZombieRigidBody.position;
@@ -293,12 +310,12 @@ namespace Zombies {
         {
             return _isChasing;
         }
+
+
         public bool IsAlive()
         {
             return _isAlive;
         }
-
-
 
 
         IEnumerator UpdateInterval()
@@ -357,9 +374,9 @@ namespace Zombies {
         {
             return _isHanging;
         }
-        public void StickWithCar(Transform stickColliderTransform)
+        public void StickWithCar(Transform stickColliderTransform,CarCollider c)
         {
-            //
+            zombieStickCollider = c;
             ZombieRigidBody.isKinematic = true;
 
             transform.SetParent(Car.transform);
@@ -375,14 +392,29 @@ namespace Zombies {
             _isMoving = false;
             _isAttacking = false;
 
-            StartCoroutine(PullCarForFlip());
+            StartCoroutine(PullCarForFlip(stickColliderTransform));
         }
+       IEnumerator PullCarForFlip(Transform stickColliderTransform)
+       {
+ 
+               
+               yield return new WaitForSeconds(PullDelayTime);
 
-       IEnumerator PullCarForFlip()
-        {
-            yield return new WaitForSeconds(PullDelayTime);
+               if (_isAlive)
+               {
+                   Car.GetComponent<Rigidbody>()
+                       .AddTorque(zombieStickDirection * (stickColliderTransform.forward) * carFlipForce,
+                           ForceMode.Impulse);
+                   carFlipForce += carFlipForceIncrement;
+               }
 
-        }
+               // Restart the coroutine if the zombie is still alive
+               if (_isAlive)
+               {
+                   StartCoroutine(PullCarForFlip(stickColliderTransform));
+               }
+   
+       }
 
         private void OnCollisionStay(Collision collision)
         {
@@ -392,8 +424,24 @@ namespace Zombies {
                 TackAction();
             }
         }
+        private void OnCollisionExit(Collision collision)
+        {
+
+            if (collision.gameObject == Car.gameObject)
+            {
+                _isAttacking = false;
+            }
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.tag == "Obstacle")
+            {
+                Die();
+            }
+        }
 
         #endregion
     }
+    
 
 }

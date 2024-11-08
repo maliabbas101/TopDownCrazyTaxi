@@ -75,15 +75,19 @@ MonoBehaviour:
   ZombieRestTime: 2
   DieDelayTime: 10
   ZombieRuningSpeed: 4
-  AttackingRange: 2
+  AttackingRange: 0
   zombieModelHangPoint: {fileID: 1680887397962447324}
   Car: {fileID: 0}
   BloodEffect: {fileID: 2147232296552787954}
   ZombieRigidBody: {fileID: 221740758255849710}
+  zombieArmature: {fileID: 1233057016750948383}
   ZombieCapsuleCollider: {fileID: 908555270018755744}
   zombieModel: {fileID: 0}
   zombieHitAudio: {fileID: 0}
   impactForce: 10
+  PullDelayTime: 2
+  carFlipForce: 1000
+  carFlipForceIncrement: 250
 --- !u!136 &908555270018755744
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -103,7 +107,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4020996
+  m_Radius: 0.31
   m_Height: 1.9716552
   m_Direction: 1
   m_Center: {x: 0, y: 0.9803204, z: 0.09790039}
@@ -275,6 +279,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2159985726921908337, guid: 50fad82765e02614ab72fa5e36728ef7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3567564748932521846, guid: 50fad82765e02614ab72fa5e36728ef7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5959556609083996950, guid: 50fad82765e02614ab72fa5e36728ef7,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -483,7 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!4 &7880056278981996459 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7801650896974216600, guid: 50fad82765e02614ab72fa5e36728ef7,
@@ -504,6 +518,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3519474958849036989}
     m_Modifications:
+    - target: {fileID: 1158599868384854139, guid: a9bab40c4613f6046b99fcc6215d7d7f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1576421299026045063, guid: a9bab40c4613f6046b99fcc6215d7d7f,
         type: 3}
       propertyPath: m_IsActive
@@ -874,6 +893,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8296259868025201691, guid: a9bab40c4613f6046b99fcc6215d7d7f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -928,7 +952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!4 &3247857626847401962 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3379315452318435061, guid: a9bab40c4613f6046b99fcc6215d7d7f,
@@ -1072,7 +1096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!4 &6360015292069300409 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6697741321985201734, guid: 6dc4cf4496348884d8ee27743ae38562,
@@ -1097,7 +1121,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3412964169950579143, guid: a2b4ed2b31fe7324b87e4911469b8d7f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5305212191161206107, guid: a2b4ed2b31fe7324b87e4911469b8d7f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506592558011526567, guid: a2b4ed2b31fe7324b87e4911469b8d7f,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1313,7 +1347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!1001 &680801140259767027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2012,6 +2046,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4570360140166157504, guid: b92454b7b65328d419f7943cb848d52c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6654981322192793760, guid: b92454b7b65328d419f7943cb848d52c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8079590699670245287, guid: b92454b7b65328d419f7943cb848d52c,
         type: 3}
       propertyPath: m_IsActive
@@ -2057,7 +2101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!4 &876944282195270441 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 116178091771712078, guid: b92454b7b65328d419f7943cb848d52c,
@@ -2242,7 +2286,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3681568645896010792, guid: 64b7e836f17d1da4f9c21548c96c9273,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3955059383011022036, guid: 64b7e836f17d1da4f9c21548c96c9273,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5774071262561474632, guid: 64b7e836f17d1da4f9c21548c96c9273,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2298,7 +2352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!4 &2187619901249391501 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1001521105800919718, guid: 64b7e836f17d1da4f9c21548c96c9273,
@@ -2482,6 +2536,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3403843064075200105, guid: 4f2a654684f941942bb2e568f8f3fbcb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479457078323790345, guid: 4f2a654684f941942bb2e568f8f3fbcb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6949537467828632846, guid: 4f2a654684f941942bb2e568f8f3fbcb,
         type: 3}
       propertyPath: m_IsActive
@@ -2527,7 +2591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!4 &804478880698873572 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1282804843045986535, guid: 4f2a654684f941942bb2e568f8f3fbcb,
@@ -2927,6 +2991,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3519474958849036989}
     m_Modifications:
+    - target: {fileID: 721686724592331687, guid: ec92fe22ba683bc4b9436f28b037db51,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1150472755667960667, guid: ec92fe22ba683bc4b9436f28b037db51,
         type: 3}
       propertyPath: m_IsActive
@@ -3087,6 +3156,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7581214404334358471, guid: ec92fe22ba683bc4b9436f28b037db51,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -3128,7 +3202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!4 &2229508273242145447 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3815221022386941225, guid: ec92fe22ba683bc4b9436f28b037db51,
@@ -3352,6 +3426,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3499874689884052303, guid: 7fccd6b663d98d94ab6e7b83778dcb93,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6026974538858184495, guid: 7fccd6b663d98d94ab6e7b83778dcb93,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6219651171328284627, guid: 7fccd6b663d98d94ab6e7b83778dcb93,
         type: 3}
       propertyPath: m_IsActive
@@ -3543,7 +3627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!4 &6076682617257027805 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9148139014184376024, guid: 7fccd6b663d98d94ab6e7b83778dcb93,
@@ -3587,7 +3671,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3458366513770137839, guid: 44b0c8d80d94fec438398960fade1410,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5277155192496063603, guid: 44b0c8d80d94fec438398960fade1410,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5532819547892771983, guid: 44b0c8d80d94fec438398960fade1410,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3988,7 +4082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!4 &6461506417773445281 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8230635212803238401, guid: 44b0c8d80d94fec438398960fade1410,
@@ -4531,6 +4625,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3747734719614507263, guid: 40ecd046f55c8f142aaff202a59c464e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6283841765629312159, guid: 40ecd046f55c8f142aaff202a59c464e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8593689578325706331, guid: 40ecd046f55c8f142aaff202a59c464e,
         type: 3}
       propertyPath: m_IsActive
@@ -4601,7 +4705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!4 &4060448514363066149 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 789029136852868721, guid: 40ecd046f55c8f142aaff202a59c464e,
@@ -4981,6 +5085,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 560421043700895303, guid: 0bfe93e5d36d96b40a7029017098025f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3638137028304654963, guid: 0bfe93e5d36d96b40a7029017098025f,
         type: 3}
       propertyPath: m_Name
@@ -5063,9 +5172,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6762604361486706417, guid: 0bfe93e5d36d96b40a7029017098025f,
         type: 3}
+      propertyPath: zombieL
+      value: 
+      objectReference: {fileID: 4648401509879339239}
+    - target: {fileID: 6762604361486706417, guid: 0bfe93e5d36d96b40a7029017098025f,
+        type: 3}
       propertyPath: Zombie_L
       value: 
       objectReference: {fileID: 4648401509879339239}
+    - target: {fileID: 7273616784902482471, guid: 0bfe93e5d36d96b40a7029017098025f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -5715,6 +5834,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4338293104962063979, guid: c47175ac8f7474c4993a9167255370f3,
         type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338293104962063979, guid: c47175ac8f7474c4993a9167255370f3,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -5767,6 +5891,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6846217461215668747, guid: c47175ac8f7474c4993a9167255370f3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6846217461215668747, guid: c47175ac8f7474c4993a9167255370f3,
         type: 3}
@@ -5873,7 +6002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!4 &5759646752015597636 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 199609297448159461, guid: c47175ac8f7474c4993a9167255370f3,
@@ -5913,6 +6042,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3519474958849036989}
     m_Modifications:
+    - target: {fileID: 654567258286603372, guid: 9c4fbb01d74c6eb469d826d279a86f93,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2697159042375746411, guid: 9c4fbb01d74c6eb469d826d279a86f93,
         type: 3}
       propertyPath: m_IsActive
@@ -6223,6 +6357,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7648076859440781324, guid: 9c4fbb01d74c6eb469d826d279a86f93,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8059142885342195952, guid: 9c4fbb01d74c6eb469d826d279a86f93,
         type: 3}
       propertyPath: m_IsActive
@@ -6269,7 +6408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!4 &1660188092033683245 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5148678693412368891, guid: 9c4fbb01d74c6eb469d826d279a86f93,
@@ -6303,6 +6442,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3519474958849036989}
     m_Modifications:
+    - target: {fileID: 225207114427690722, guid: a8cc3b8f73a7fea418b78e0abaefb745,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 492200837401019934, guid: a8cc3b8f73a7fea418b78e0abaefb745,
         type: 3}
       propertyPath: m_IsActive
@@ -6458,6 +6602,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6923731065681349250, guid: a8cc3b8f73a7fea418b78e0abaefb745,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -6475,6 +6624,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6916171074684456659}
   m_SourcePrefab: {fileID: 100100000, guid: a8cc3b8f73a7fea418b78e0abaefb745, type: 3}
+--- !u!1 &1233057016750948383 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4638799225852506182, guid: a8cc3b8f73a7fea418b78e0abaefb745,
+    type: 3}
+  m_PrefabInstance: {fileID: 5871815968391819353}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5160119871758257328 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1648471585379597545, guid: a8cc3b8f73a7fea418b78e0abaefb745,
@@ -6512,7 +6667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!4 &7831029817853515829 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4454492842317015148, guid: a8cc3b8f73a7fea418b78e0abaefb745,
@@ -7073,6 +7228,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3519474958849036989}
     m_Modifications:
+    - target: {fileID: 755408181530308075, guid: 79c9af0b0d057c0469cc9eb3cfef3619,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2738462433185469164, guid: 79c9af0b0d057c0469cc9eb3cfef3619,
         type: 3}
       propertyPath: m_IsActive
@@ -7383,6 +7543,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7587914086677334411, guid: 79c9af0b0d057c0469cc9eb3cfef3619,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7834311754552156535, guid: 79c9af0b0d057c0469cc9eb3cfef3619,
         type: 3}
       propertyPath: m_IsActive
@@ -7423,7 +7588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!4 &879654222095665580 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6321996859642269445, guid: 79c9af0b0d057c0469cc9eb3cfef3619,
@@ -7648,6 +7813,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1721591938696023482, guid: 1c3f7ea0d29bb0d4796e05fda2d54dd3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2476437861987930510, guid: 1c3f7ea0d29bb0d4796e05fda2d54dd3,
         type: 3}
       propertyPath: m_Name
@@ -7803,6 +7973,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8417863955048524250, guid: 1c3f7ea0d29bb0d4796e05fda2d54dd3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -7869,7 +8044,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!1001 &7011137672398063612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8058,6 +8233,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3519474958849036989}
     m_Modifications:
+    - target: {fileID: 38330057372962481, guid: 8e5dd6208d4871340be33a93d9821801,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 395351787961706061, guid: 8e5dd6208d4871340be33a93d9821801,
         type: 3}
       propertyPath: m_IsActive
@@ -8218,6 +8398,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7187249048363199185, guid: 8e5dd6208d4871340be33a93d9821801,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -8259,7 +8444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!4 &6758784139606068559 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4501838163125635135, guid: 8e5dd6208d4871340be33a93d9821801,
@@ -8623,6 +8808,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4034747113329854148, guid: 6fb522391c29f8c4f92fdffd0ada0efd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109235194384048804, guid: 6fb522391c29f8c4f92fdffd0ada0efd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8412168728176679008, guid: 6fb522391c29f8c4f92fdffd0ada0efd,
         type: 3}
       propertyPath: m_IsActive
@@ -8693,7 +8888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!4 &8589106147079611313 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1922728630595759923, guid: 6fb522391c29f8c4f92fdffd0ada0efd,
@@ -8848,6 +9043,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4535953000444118570, guid: 8af750dac57e3584d8e6138d7298a5e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756772925548438090, guid: 8af750dac57e3584d8e6138d7298a5e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8196454026158972237, guid: 8af750dac57e3584d8e6138d7298a5e1,
         type: 3}
       propertyPath: m_IsActive
@@ -8912,7 +9117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!4 &8060626400055766628 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 950211683795108, guid: 8af750dac57e3584d8e6138d7298a5e1,
@@ -8934,6 +9139,11 @@ PrefabInstance:
     m_TransformParent: {fileID: 3519474958849036989}
     m_Modifications:
     - target: {fileID: 103951078156781032, guid: 15386e9fc09cf3e45becc4ba0bfe2082,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 325930794854362388, guid: 15386e9fc09cf3e45becc4ba0bfe2082,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -9093,6 +9303,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7472562777232230772, guid: 15386e9fc09cf3e45becc4ba0bfe2082,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -9140,7 +9355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91debee6bc644499a7c49ccc867459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zombie_L: {fileID: 4648401509879339239}
+  zombieL: {fileID: 4648401509879339239}
 --- !u!1 &9129695652209110800 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1244511741990010655, guid: 15386e9fc09cf3e45becc4ba0bfe2082,

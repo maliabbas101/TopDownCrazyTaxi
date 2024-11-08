@@ -442,8 +442,8 @@ namespace Zombies
             var cc = dest.GetComponent<Rigidbody>();
             if (cc == null) cc = dest.AddComponent<Rigidbody>();
             cc.mass = rb.mass;
-            cc.drag = rb.drag;
-            cc.angularDrag = rb.angularDrag;
+            cc.linearDamping = rb.linearDamping;
+            cc.angularDamping = rb.angularDamping;
             cc.useGravity = rb.useGravity;
             cc.isKinematic = rb.isKinematic;
             cc.interpolation = rb.interpolation;
@@ -540,7 +540,7 @@ namespace Zombies
                 {
                     rbCopy.transform.position = rb.transform.position;
                     rbCopy.transform.rotation = rb.transform.rotation;
-                    rbCopy.velocity = rb.velocity;
+                    rbCopy.linearVelocity = rb.linearVelocity;
                     rbCopy.angularVelocity = rb.angularVelocity;
                     rb.gameObject.SetActive(false);
                     rbCopy.isKinematic = false;

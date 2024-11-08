@@ -1,16 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class CarDebuggerPanel : MonoBehaviour
 {
-    [SerializeField] PrometeoCarController carController;
-    [SerializeField] Slider maxSpeed, maxReverseSpeed, accelerationMul, maxSteeringAng, steeringSpeed, breakForce, decMul, driftMul;
-    [SerializeField] TextMeshProUGUI maxSpeedText, maxReverseSpeedText, accelerationMulText, maxSteeringAngText, steeringSpeedText, breakForceText, decMulText, driftMulText;
-
+    [SerializeField] private PrometeoCarController carController;
+    [SerializeField] private Slider maxSpeed,
+        maxReverseSpeed,
+        accelerationMul,
+        maxSteeringAng,
+        steeringSpeed,
+        breakForce,
+        decMul,
+        driftMul;
+    [SerializeField] private TextMeshProUGUI maxSpeedText, maxReverseSpeedText, accelerationMulText, maxSteeringAngText, steeringSpeedText, breakForceText, decMulText, driftMulText;
+    
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         maxSpeed.value = carController.maxSpeed;
         maxReverseSpeed.value = carController.maxReverseSpeed;
@@ -57,6 +62,8 @@ public class CarDebuggerPanel : MonoBehaviour
     {
         carController.maxSteeringAngle = (int )maxSteeringAng.value;
         maxSteeringAngText.text = $"{(int)maxSteeringAng.value}";
+        
+        
     }
     public void SteeringSpeed()
     {

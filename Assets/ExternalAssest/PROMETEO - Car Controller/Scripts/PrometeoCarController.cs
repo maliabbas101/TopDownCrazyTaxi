@@ -266,14 +266,22 @@ public class PrometeoCarController : MonoBehaviour
     void Update()
     {
 
+      if (carHealth <= 0)
+      {
+        carRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        carSpeed = 0;
+        
+        return;
+      }
+
       //CAR DATA
 
       // We determine the speed of the car.
       carSpeed = (2 * Mathf.PI * frontLeftCollider.radius * frontLeftCollider.rpm * 60) / 1000;
       // Save the local velocity of the car in the x axis. Used to know if the car is drifting.
-      localVelocityX = transform.InverseTransformDirection(carRigidbody.velocity).x;
+      localVelocityX = transform.InverseTransformDirection(carRigidbody.linearVelocity).x;
       // Save the local velocity of the car in the z axis. Used to know if the car is going forward or backwards.
-      localVelocityZ = transform.InverseTransformDirection(carRigidbody.velocity).z;
+      localVelocityZ = transform.InverseTransformDirection(carRigidbody.linearVelocity).z;
 
       //CAR PHYSICS
 
@@ -394,7 +402,7 @@ public class PrometeoCarController : MonoBehaviour
       if(useSounds){
         try{
           if(carEngineSound != null){
-            float engineSoundPitch = initialCarEngineSoundPitch + (Mathf.Abs(carRigidbody.velocity.magnitude) / 25f);
+            float engineSoundPitch = initialCarEngineSoundPitch + (Mathf.Abs(carRigidbody.linearVelocity.magnitude) / 25f);
             carEngineSound.pitch = engineSoundPitch;
           }
           if((isDrifting) || (isTractionLocked && Mathf.Abs(carSpeed) > 12f)){
@@ -613,7 +621,7 @@ public class PrometeoCarController : MonoBehaviour
           throttleAxis = 0f;
         }
       }
-      carRigidbody.velocity = carRigidbody.velocity * (1f / (1f + (0.025f * decelerationMultiplier)));
+      carRigidbody.linearVelocity = carRigidbody.linearVelocity * (1f / (1f + (0.025f * decelerationMultiplier)));
       // Since we want to decelerate the car, we are going to remove the torque from the wheels of the car.
       frontLeftCollider.motorTorque = 0;
       frontRightCollider.motorTorque = 0;
@@ -621,8 +629,8 @@ public class PrometeoCarController : MonoBehaviour
       rearRightCollider.motorTorque = 0;
       // If the magnitude of the car's velocity is less than 0.25f (very slow velocity), then stop the car completely and
       // also cancel the invoke of this method.
-      if(carRigidbody.velocity.magnitude < 0.25f){
-        carRigidbody.velocity = Vector3.zero;
+      if(carRigidbody.linearVelocity.magnitude < 0.25f){
+        carRigidbody.linearVelocity = Vector3.zero;
         CancelInvoke("DecelerateCar");
       }
     }
@@ -775,6 +783,17 @@ public class PrometeoCarController : MonoBehaviour
     {
         carHealth--;
         carHealthSlider.value = carHealth;
+        if (carHealth <= 0)
+        {
+          GameOverView.CreateGameOverView();
+        }
+    }
+    
+    public void DestroyCar()
+    {
+      carHealth = 0;
+      carHealthSlider.value = 0;
+      GameOverView.CreateGameOverView();
     }
 
 }

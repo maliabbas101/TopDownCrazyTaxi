@@ -1,31 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-namespace Zombies {
-    public class ZombiePunch : MonoBehaviour
+using Zombies;
+
+public class ZombiePunch : MonoBehaviour
+{
+    [SerializeField] private ZombieMovement zombie;
+    private PrometeoCarController _car;
+    private bool _canDamage;
+
+    private void Start()
     {
-        [SerializeField] ZombieMovement zombie;
-      PrometeoCarController car;
-        private bool canDamage;
-
-        private void Start()
-        {
-            car = GameObject.FindFirstObjectByType<PrometeoCarController>();
-            canDamage = true;
-        }
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.name == "Collider" && zombie.IsAttacking() && canDamage)
-            {
-                canDamage = false;
-                car.DamageCar();
-            }
+        _car = GameObject.FindFirstObjectByType<PrometeoCarController>();
+        _canDamage = true;
     }
-
-        private void OnTriggerExit(Collider other)
-        {
-            canDamage = true;
-        }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name != "Collider" || !zombie.IsAttacking() || !_canDamage) return;
+        _canDamage = false;
+        _car.DamageCar();
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        _canDamage = true;
     }
 }
